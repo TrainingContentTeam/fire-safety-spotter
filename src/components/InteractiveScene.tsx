@@ -51,7 +51,7 @@ const InteractiveScene = ({
           <button
             key={hotspot.id}
             onClick={() => handleClick(hotspot.id)}
-            className={`hotspot-marker absolute w-8 h-8 sm:w-10 sm:h-10 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 cursor-pointer transition-all duration-300 flex items-center justify-center z-10
+            className={`hotspot-marker absolute w-6 h-6 sm:w-7 sm:h-7 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 cursor-pointer transition-all duration-300 flex items-center justify-center z-10
               ${
                 isFound
                   ? "found bg-success/80 border-success"
@@ -63,9 +63,9 @@ const InteractiveScene = ({
             aria-label={`Inspect ${hotspot.label}`}
           >
             {isFound ? (
-              <Check className="w-4 h-4 sm:w-5 sm:h-5 text-success-foreground" />
+              <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-success-foreground" />
             ) : (
-              <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-primary-foreground" />
+              <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-primary-foreground" />
             )}
           </button>
         );
