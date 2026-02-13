@@ -35,11 +35,11 @@ const InteractiveScene = ({
   const activeHotspot = hotspots.find((h) => h.id === activeId);
 
   return (
-    <div className="relative w-full" ref={containerRef}>
+    <div className="relative w-full h-full" ref={containerRef}>
       <img
         src={imageSrc}
         alt={imageAlt}
-        className="w-full h-auto block rounded-lg"
+        className="w-full h-full object-contain block rounded-lg"
         draggable={false}
       />
 
