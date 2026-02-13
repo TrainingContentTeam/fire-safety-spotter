@@ -118,48 +118,8 @@ const SpotTheHazard = () => {
 
       {/* Main content */}
       <main className="flex-1 min-h-0 flex flex-col">
-        {/* Part header */}
-        <div className="px-4 py-3 sm:px-6 sm:py-4 max-w-5xl mx-auto w-full">
-          <div className="flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary shrink-0" />
-              <div>
-                <h2 className="text-sm sm:text-base font-bold text-foreground">
-                  {part.title}
-                </h2>
-                <p className="text-xs text-muted-foreground">{part.subtitle}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-1 sm:gap-2">
-              <span
-                className={`text-xs sm:text-sm font-bold ${
-                  partComplete ? "text-success" : "text-primary"
-                }`}
-              >
-                {found.size} / {part.hotspots.length}
-              </span>
-              {partComplete && (
-                <span className="text-xs bg-success/20 text-success px-2 py-0.5 rounded-full font-medium">
-                  ✓ Complete
-                </span>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* Scene */}
-        <div className="flex-1 min-h-0 px-2 sm:px-4 pb-4 max-w-5xl mx-auto w-full">
-          <InteractiveScene
-            imageSrc={part.image}
-            imageAlt={part.imageAlt}
-            hotspots={part.hotspots}
-            foundIds={found}
-            onHotspotClick={handleHotspotClick}
-          />
-        </div>
-
         {/* Navigation */}
-        <div className="px-4 py-3 sm:px-6 sm:py-4 border-t border-border bg-card">
+        <div className="px-4 py-3 sm:px-6 sm:py-4 border-b border-border bg-card">
           <div className="max-w-5xl mx-auto flex items-center justify-between">
             <button
               onClick={() => setCurrentPart(0)}
@@ -199,6 +159,46 @@ const SpotTheHazard = () => {
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
+        </div>
+
+        {/* Part header */}
+        <div className="px-4 py-3 sm:px-6 sm:py-4 max-w-5xl mx-auto w-full">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary shrink-0" />
+              <div>
+                <h2 className="text-sm sm:text-base font-bold text-foreground">
+                  {part.title}
+                </h2>
+                <p className="text-xs text-muted-foreground">{part.subtitle}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-1 sm:gap-2">
+              <span
+                className={`text-xs sm:text-sm font-bold ${
+                  partComplete ? "text-success" : "text-primary"
+                }`}
+              >
+                {found.size} / {part.hotspots.length}
+              </span>
+              {partComplete && (
+                <span className="text-xs bg-success/20 text-success px-2 py-0.5 rounded-full font-medium">
+                  ✓ Complete
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Scene */}
+        <div className="flex-1 min-h-0 px-2 sm:px-4 pb-4 max-w-5xl mx-auto w-full">
+          <InteractiveScene
+            imageSrc={part.image}
+            imageAlt={part.imageAlt}
+            hotspots={part.hotspots}
+            foundIds={found}
+            onHotspotClick={handleHotspotClick}
+          />
         </div>
       </main>
 
