@@ -1,30 +1,20 @@
 
 
-## Fix GitHub Actions Build Failure
+## Fix Image Size and Show Navigation Tabs within 1920x800
 
-The `npm ci` command requires `package-lock.json` to be perfectly in sync with `package.json`. Yours is out of date. The quickest fix is to change the workflow to use `npm install` instead.
+The image is currently set to fill the full width (`w-full h-auto`), which makes it taller than the available space inside the 800px container. This pushes the bottom navigation bar out of view.
 
-### Code Change
+### Changes
 
-**`.github/workflows/deploy.yml`** -- Replace `npm ci` with `npm install`:
+**`src/components/InteractiveScene.tsx`**
+- Change the image from `w-full h-auto` to `w-full h-full object-contain` so it scales down to fit the available vertical space
+- Add `h-full` to the container wrapper so it respects the space given by the parent
 
-```yaml
-- run: npm install
-- run: npm run build
-```
+**`src/components/SpotTheHazard.tsx`**
+- Change the scene wrapper from `flex-1` to `flex-1 min-h-0` -- this is the key fix. Without `min-h-0`, flex children with intrinsic content (the image) won't shrink below their natural size. Adding `min-h-0` allows the image area to shrink so the navigation bar stays visible.
 
-That single word change will resolve the build failure. The workflow will regenerate the lock file on the fly and proceed with the build.
-
-### Alternative (if you prefer `npm ci` long-term)
-
-Run this locally and push the updated lock file:
-
-```bash
-npm install
-git add package-lock.json
-git commit -m "update lock file"
-git push
-```
-
-Then the existing `npm ci` would work. But changing to `npm install` in the workflow is simpler and avoids this issue recurring.
-
+### Result
+- Header, progress bar, part header all remain at the top
+- The image scales down to fit the remaining space
+- The navigation bar (Back / Next buttons and dot indicators) is always visible at the bottom
+- Hotspot positions remain accurate since they use percentages relative to the image container
