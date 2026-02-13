@@ -117,7 +117,7 @@ const SpotTheHazard = () => {
       </div>
 
       {/* Main content */}
-      <main className="flex-1 flex flex-col">
+      <main className="flex-1 min-h-0 flex flex-col">
         {/* Part header */}
         <div className="px-4 py-3 sm:px-6 sm:py-4 max-w-5xl mx-auto w-full">
           <div className="flex items-center justify-between gap-2">
@@ -148,7 +148,7 @@ const SpotTheHazard = () => {
         </div>
 
         {/* Scene */}
-        <div className="flex-1 px-2 sm:px-4 pb-4 max-w-5xl mx-auto w-full">
+        <div className="flex-1 min-h-0 px-2 sm:px-4 pb-4 max-w-5xl mx-auto w-full">
           <InteractiveScene
             imageSrc={part.image}
             imageAlt={part.imageAlt}
