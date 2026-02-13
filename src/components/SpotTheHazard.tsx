@@ -72,7 +72,7 @@ const SpotTheHazard = () => {
   const Icon = part.icon;
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="w-[1920px] h-[800px] bg-background flex flex-col overflow-hidden">
       {/* Header */}
       <header className="bg-card border-b border-border px-4 py-3 sm:px-6 sm:py-4">
         <div className="max-w-5xl mx-auto flex items-center justify-between gap-3">
