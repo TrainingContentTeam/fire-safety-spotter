@@ -85,7 +85,7 @@ export const sceneHotspots: Hotspot[] = [
     label: "Involved Structure",
     description: "The area near the involved structure poses burn and injury risks including structural collapse, falling debris, and radiant heat. Always wear proper PPE and maintain a safe operating distance.",
     x: 75,
-    y: 42,
+    y: 30,
   },
   {
     id: "hose",
