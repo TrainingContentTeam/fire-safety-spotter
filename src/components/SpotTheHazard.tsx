@@ -69,6 +69,7 @@ const SpotTheHazard = () => {
     setCurrentPart(0);
     setFoundSets([new Set(), new Set()]);
     completionSentRef.current = false;
+    setShowComplete(false);
   };
 
   const partComplete = found.size === part.hotspots.length;
