@@ -193,7 +193,7 @@ const SpotTheHazard = () => {
         </div>
 
         {/* Scene */}
-        <div className="flex-1 min-h-0 px-2 sm:px-4 pb-4 max-w-5xl mx-auto w-full">
+        <div className="flex-1 min-h-0 px-2 sm:px-4 pb-2 max-w-5xl mx-auto w-full">
           <InteractiveScene
             imageSrc={part.image}
             imageAlt={part.imageAlt}
@@ -202,6 +202,19 @@ const SpotTheHazard = () => {
             onHotspotClick={handleHotspotClick}
           />
         </div>
+
+        {/* Complete Activity button */}
+        {allComplete && !showComplete && (
+          <div className="px-4 pb-3 flex justify-center">
+            <button
+              onClick={() => setShowComplete(true)}
+              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-medium transition-colors animate-in fade-in duration-500"
+            >
+              <Shield className="w-4 h-4" />
+              Complete Activity
+            </button>
+          </div>
+        )}
       </main>
 
       {/* Completion overlay */}
