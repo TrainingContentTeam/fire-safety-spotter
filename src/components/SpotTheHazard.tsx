@@ -33,6 +33,7 @@ const SpotTheHazard = () => {
     new Set(),
   ]);
   const completionSentRef = useRef(false);
+  const [showComplete, setShowComplete] = useState(false);
 
   const part = PARTS[currentPart];
   const found = foundSets[currentPart];
@@ -48,6 +49,8 @@ const SpotTheHazard = () => {
       } catch {
         // silently fail if not in iframe
       }
+      const timer = setTimeout(() => setShowComplete(true), 3000);
+      return () => clearTimeout(timer);
     }
   }, [allComplete]);
 
@@ -66,6 +69,7 @@ const SpotTheHazard = () => {
     setCurrentPart(0);
     setFoundSets([new Set(), new Set()]);
     completionSentRef.current = false;
+    setShowComplete(false);
   };
 
   const partComplete = found.size === part.hotspots.length;
@@ -203,7 +207,7 @@ const SpotTheHazard = () => {
       </main>
 
       {/* Completion overlay */}
-      {allComplete && (
+      {showComplete && (
         <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
           <div className="bg-card border border-border rounded-xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl">
             <div className="w-16 h-16 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-4">
