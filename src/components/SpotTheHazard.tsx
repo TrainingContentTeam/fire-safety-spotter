@@ -98,14 +98,24 @@ const SpotTheHazard = () => {
               <span className="text-primary font-bold">{foundAll}</span>
               <span> / {totalAll}</span>
             </div>
-            <button
-              onClick={handleRestart}
-              className="flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-lg bg-secondary hover:bg-secondary/80 text-secondary-foreground text-xs sm:text-sm font-medium transition-colors"
-              aria-label="Restart activity"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Restart</span>
-            </button>
+            {allComplete && !showComplete ? (
+              <button
+                onClick={() => setShowComplete(true)}
+                className="flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground text-xs sm:text-sm font-medium transition-colors animate-in fade-in duration-500"
+              >
+                <Shield className="w-3.5 h-3.5" />
+                <span>Complete</span>
+              </button>
+            ) : (
+              <button
+                onClick={handleRestart}
+                className="flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-lg bg-secondary hover:bg-secondary/80 text-secondary-foreground text-xs sm:text-sm font-medium transition-colors"
+                aria-label="Restart activity"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Restart</span>
+              </button>
+            )}
           </div>
         </div>
       </header>
@@ -202,19 +212,6 @@ const SpotTheHazard = () => {
             onHotspotClick={handleHotspotClick}
           />
         </div>
-
-        {/* Complete Activity button */}
-        {allComplete && !showComplete && (
-          <div className="px-4 pb-3 flex justify-center">
-            <button
-              onClick={() => setShowComplete(true)}
-              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-medium transition-colors animate-in fade-in duration-500"
-            >
-              <Shield className="w-4 h-4" />
-              Complete Activity
-            </button>
-          </div>
-        )}
       </main>
 
       {/* Completion overlay */}
