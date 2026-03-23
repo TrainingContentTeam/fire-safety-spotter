@@ -212,19 +212,6 @@ const SpotTheHazard = () => {
             onHotspotClick={handleHotspotClick}
           />
         </div>
-
-        {/* Complete Activity button */}
-        {allComplete && !showComplete && (
-          <div className="px-4 pb-3 flex justify-center">
-            <button
-              onClick={() => setShowComplete(true)}
-              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-medium transition-colors animate-in fade-in duration-500"
-            >
-              <Shield className="w-4 h-4" />
-              Complete Activity
-            </button>
-          </div>
-        )}
       </main>
 
       {/* Completion overlay */}
