@@ -1,20 +1,33 @@
 
 
-## Fix Image Size and Show Navigation Tabs within 1920x800
+## Delay Completion Until Last Hotspot Popup Is Dismissed
 
-The image is currently set to fill the full width (`w-full h-auto`), which makes it taller than the available space inside the 800px container. This pushes the bottom navigation bar out of view.
+**Problem**: When the user clicks the final hotspot, the completion overlay fires immediately via `useEffect`, covering the popup before the user can read it.
+
+**Solution**: Add a delay before triggering the completion overlay. Instead of firing completion as soon as `allComplete` becomes true, wait 3 seconds so the user has time to read the last hotspot's info popup.
 
 ### Changes
 
-**`src/components/InteractiveScene.tsx`**
-- Change the image from `w-full h-auto` to `w-full h-full object-contain` so it scales down to fit the available vertical space
-- Add `h-full` to the container wrapper so it respects the space given by the parent
-
 **`src/components/SpotTheHazard.tsx`**
-- Change the scene wrapper from `flex-1` to `flex-1 min-h-0` -- this is the key fix. Without `min-h-0`, flex children with intrinsic content (the image) won't shrink below their natural size. Adding `min-h-0` allows the image area to shrink so the navigation bar stays visible.
+- Replace the instant `useEffect` completion trigger with a `setTimeout` of ~3 seconds
+- Store the timeout ID so it can be cleaned up on unmount or restart
+- The `postMessage` to the LMS still fires immediately (so completion is recorded), but the overlay appears after the delay
 
-### Result
-- Header, progress bar, part header all remain at the top
-- The image scales down to fit the remaining space
-- The navigation bar (Back / Next buttons and dot indicators) is always visible at the bottom
-- Hotspot positions remain accurate since they use percentages relative to the image container
+```tsx
+useEffect(() => {
+  if (allComplete && !completionSentRef.current) {
+    completionSentRef.current = true;
+    try {
+      window.parent.postMessage({ type: "complete" }, "*");
+    } catch {}
+    // Delay the overlay so the user can read the last hotspot
+    const timer = setTimeout(() => setShowComplete(true), 3000);
+    return () => clearTimeout(timer);
+  }
+}, [allComplete]);
+```
+
+- Add `const [showComplete, setShowComplete] = useState(false)` state
+- Change the completion overlay condition from `allComplete` to `showComplete`
+- Reset `showComplete` to `false` in `handleRestart`
+
