@@ -49,6 +49,8 @@ const SpotTheHazard = () => {
       } catch {
         // silently fail if not in iframe
       }
+      const timer = setTimeout(() => setShowComplete(true), 3000);
+      return () => clearTimeout(timer);
     }
   }, [allComplete]);
 
