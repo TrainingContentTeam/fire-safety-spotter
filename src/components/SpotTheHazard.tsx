@@ -33,6 +33,7 @@ const SpotTheHazard = () => {
     new Set(),
   ]);
   const completionSentRef = useRef(false);
+  const [showComplete, setShowComplete] = useState(false);
 
   const part = PARTS[currentPart];
   const found = foundSets[currentPart];
